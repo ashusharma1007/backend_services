@@ -2,9 +2,9 @@ const JobsDB = require("./../models/JobsDB");
 const ErrorResponse = require("./../utils/errorResponse");
 
 const registerJob = async (req, res, next) => {
-    const { clientId, clientName, jobName,timings,gender,shift, status, location, salary} = req.body;
+    const { clientId, clientName, jobName,timings,gender,shift, status, location, salary, JobID} = req.body;
   
-    if (!clientId||!clientName||!jobName||!timings||!gender) {
+    if (!clientId||!clientName||!jobName||!timings||!gender||!JobID) {
       //sending error
       return next(new ErrorResponse("please provide an (clientID/ ClientName/ jobname)", 400));
     }
@@ -20,7 +20,8 @@ const registerJob = async (req, res, next) => {
         shift,
         status,
         location,
-        salary
+        salary,
+        JobID
 
        
       });

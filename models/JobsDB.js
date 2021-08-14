@@ -44,6 +44,10 @@ const JobsDBSchema = new mongoose.Schema({
         type: String,
         required:[true, "Please provide a address"]
     },
+     JobID: {
+        type: String,
+        required:[true, "Please provide a address"]
+    },
 
 });
 const JobsDB = mongoose.model("JobsDB", JobsDBSchema); 
