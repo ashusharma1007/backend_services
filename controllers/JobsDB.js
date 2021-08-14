@@ -72,4 +72,36 @@ const AllFemaleJobs = async(req, res, next) =>{
     }
 
 }
-module.exports = {AllFemaleJobs, AllJobs,registerJob};
+const JobDetails = async(req, res, next) =>{
+
+  const JobID = req.params.JobID;
+  if (!JobID) {
+      //sending error
+      return next(new ErrorResponse("No Job ID mentioned", 400));
+    }
+  
+    let job;
+  
+    try {
+      job = await JobsDB.findOne({ JobID });
+  
+      if (!job) {
+          //sending error
+          return next(
+            new ErrorResponse("No job with that ID", 401)
+          );
+      }
+  
+    } catch (error) {
+      //sending error
+      next(error);
+    }
+  
+    res.status(200).json({
+      success: true,
+      job,
+    });
+
+}
+
+module.exports = {AllFemaleJobs, AllJobs,registerJob,JobDetails};
