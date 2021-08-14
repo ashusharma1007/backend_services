@@ -6,6 +6,6 @@ const {AllFemaleJobs, AllJobs,registerJob,JobDetails} =  require("./../controlle
 router.route("/allfemaleJobs").get(AllFemaleJobs);
 
 router.route("/allJobs").get(AllJobs);
-router.route("/jobDetails").get(JobDetails);
+router.route("/jobDetails/:JobID").get(JobDetails);
 router.route("/registerJob").post(registerJob);
 module.exports = router;
