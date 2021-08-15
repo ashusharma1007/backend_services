@@ -17,7 +17,13 @@ const ClientDBSchema = new mongoose.Schema({
         required:[true, "Please provide a address"]
 
     },
+   
     phone: {
+        type: String,
+        required:[true, "Please provide a address"]
+
+    },
+    status: {
         type: String,
         required:[true, "Please provide a address"]
 

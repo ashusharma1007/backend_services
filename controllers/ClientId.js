@@ -1,7 +1,7 @@
 const ClientDB = require("../models/ClientId");
 const ErrorResponse = require("./../utils/errorResponse");
 const registerClient = async (req, res, next) => {
-    const { clientId, name, org,phone} = req.body;
+    const { clientId, name, org,phone,status} = req.body;
   
     if (!clientId||! name||!org||!phone) {
       //sending error
@@ -11,7 +11,7 @@ const registerClient = async (req, res, next) => {
     try {
   
       const client = await ClientDB.create({
-        clientId, name, org,phone
+        clientId, name, org,phone, status
 
        
       });
@@ -27,4 +27,21 @@ const registerClient = async (req, res, next) => {
       next(error);
     }
   };
-  module.exports = {registerClient};
+  const allClients = async(req, res, next) =>{
+
+    try{
+
+        const ClientsData = await ClientDB.find( { status : "active" } );
+
+
+        res.status(200).json({
+            success:true,
+            ClientsData
+        })
+    }
+    catch(error){
+      next(error);
+    }
+
+}
+  module.exports = {registerClient,allClients};
