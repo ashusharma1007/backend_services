@@ -4,7 +4,7 @@ const ErrorResponse = require("./../utils/errorResponse");
 const registerJob = async (req, res, next) => {
     const { clientId, clientName, jobName,timings,gender,shift, status, location, salary, JobID} = req.body;
   
-    if (!clientId||!clientName||!jobName||!timings||!gender||!JobID) {
+    if (!clientId||!clientName||!jobName||!timings||!gender) {
       //sending error
       return next(new ErrorResponse("please provide an (clientID/ ClientName/ jobname)", 400));
     }
