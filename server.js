@@ -19,6 +19,7 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
 app.use("/api/Jobs", require("./routes/JobsDB"));
+app.use("/api/client", require("./routes/ClientId"));
 // fileupload
 /**
  * error handling should be the last peice of the middleware
