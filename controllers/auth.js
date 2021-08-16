@@ -32,21 +32,21 @@ const register = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
-  const { PhoneNumber, password } = req.body;
+  const { username, password } = req.body;
 
-  if (!PhoneNumber || !password) {
+  if (!username || !password) {
     //sending error
-    return next(new ErrorResponse("please provide an PhoneNumber and password", 400));
+    return next(new ErrorResponse("please provide an username and password", 400));
   }
 
   //now to check if the user already exist or not!!
   try {
-    const user = await User.findOne({ PhoneNumber }).select("password").select("PhoneNumber");
+    const user = await User.findOne({ username }).select("password").select("username");
 
     if (!user) {
       //sending error
       return next(
-        new ErrorResponse("invalid PhoneNumber", 401)
+        new ErrorResponse("invalid username", 401)
       );
     }
 
@@ -61,7 +61,7 @@ const login = async (req, res, next) => {
       );
     }
 
-    sendToken(user, 200, res, user.PhoneNumber);
+    sendToken(user, 200, res, user.username);
   } catch (error) {
     //sending error
     next(error);
