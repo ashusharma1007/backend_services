@@ -16,6 +16,7 @@ const port = process.env.PORT || 5000;
 //middleware
 app.use(cors())
 app.use(express.json());
+app.use("/api/apply", require("./routes/application"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
 app.use("/api/Jobs", require("./routes/JobsDB"));
