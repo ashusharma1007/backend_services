@@ -62,21 +62,21 @@ const registerApplication = async (req, res, next) => {
       next(error);
     }
 }
-// const AllFemaleJobs = async(req, res, next) =>{
+const AdminApplications = async(req, res, next) =>{
 
-//     try{
+    try{
 
-//         const allFemaleJobs = await JobsDB.find( { gender : "female" } );
+        const allApplications = await ApplicationDB.find( );
 
 
-//         res.status(200).json({
-//             success:true,
-//             allFemaleJobs
-//         })
-//     }
-//     catch(error){
-//       next(error);
-//     }
+        res.status(200).json({
+            success:true,
+            allApplications
+        })
+    }
+    catch(error){
+      next(error);
+    }
 
-// }
-module.exports = {registerApplication, AllApplications};
+}
+module.exports = {registerApplication, AllApplications, AdminApplications};
