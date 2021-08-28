@@ -2,7 +2,7 @@ const JobsDB = require("./../models/JobsDB");
 const ErrorResponse = require("./../utils/errorResponse");
 
 const registerJob = async (req, res, next) => {
-    const { clientId, clientName, jobName,timings,gender,shift, status, location, salary} = req.body;
+    const { clientId, clientName, jobName,timings,gender,shift, status, location, salary, JobID} = req.body;
   
     if (!clientId||!clientName||!jobName||!timings||!gender) {
       //sending error
@@ -20,7 +20,8 @@ const registerJob = async (req, res, next) => {
         shift,
         status,
         location,
-        salary
+        salary,
+        JobID
 
        
       });
@@ -71,4 +72,36 @@ const AllFemaleJobs = async(req, res, next) =>{
     }
 
 }
-module.exports = {AllFemaleJobs, AllJobs,registerJob};
+const JobDetails = async(req, res, next) =>{
+
+  const JobID = req.params.JobID;
+  if (!JobID) {
+      //sending error
+      return next(new ErrorResponse("No Job ID mentioned", 400));
+    }
+  
+    let job;
+  
+    try {
+      job = await JobsDB.findOne({ JobID });
+  
+      if (!job) {
+          //sending error
+          return next(
+            new ErrorResponse("No job with that ID", 401)
+          );
+      }
+  
+    } catch (error) {
+      //sending error
+      next(error);
+    }
+  
+    res.status(200).json({
+      success: true,
+      job,
+    });
+
+}
+
+module.exports = {AllFemaleJobs, AllJobs,registerJob,JobDetails};
